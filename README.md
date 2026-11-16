@@ -4,11 +4,7 @@ O Sangue Escuro RPG pode ser complementado com módulos de extensão opcionais. 
 
 ### 🛒 Saques e Mercantes
 Saques e Mercantes é um módulo auxiliar para o sistema Sangue Escuro RPG. Ele oferece uma solução completa e independente para gerenciar carteiras, mercantes, recipientes de saque e a distribuição de espólios.
-
 >
-```Link 
-https://raw.githubusercontent.com/yobwarz/Dark_Blood_RPG-Saques-e-Mercantes/main/module.json
-```
 ### Principais qualidades
 💰 Sistema próprio de carteiras e moedas personalizáveis, com conversão, ajuste de saldo e exibição limpa na ficha do personagem.
 
@@ -23,6 +19,19 @@ https://raw.githubusercontent.com/yobwarz/Dark_Blood_RPG-Saques-e-Mercantes/main
 🛡️ Operações robustas com recuperação de falhas, diários privados e proteção contra interrupções.
 >
 O módulo prioriza praticidade, privacidade e controle total do Mestre, funcionando de forma nativa e estável dentro do ecossistema Sangue Escuro.
+
+>
+### 📦 Instalação e uso
+1. Na tela inicial do Foundry Virtual Tabletop, acesse Módulos adicionais → Instalar módulo.
+2. Cole o link abaixo no campo URL do manifesto e clique em Instalar:
+```Link 
+https://raw.githubusercontent.com/yobwarz/Dark_Blood_RPG-Saques-e-Mercantes/main/module.json
+```
+3. Abra seu mundo **Sangue Escuro** e vá em Configurações → Gerenciar módulos.
+4. Ative **Sangue Escuro: Saques e Mercantes** e salve.
+Após o recarregamento, o módulo estará ativo. Confira os requisitos de compatibilidade e as instruções de uso na página de cada módulo.
+
+**Requisitos:** Foundry VTT 13+
 >
 ### Observação
 **O uso dessas extensões é opcional.** Você pode jogar com o sistema base e adicionar os módulos conforme as necessidades da sua mesa.
