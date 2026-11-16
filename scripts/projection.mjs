@@ -1,0 +1,23 @@
+import {all,copy,enrich,owner} from './core.mjs';
+import {read,userView,writeView} from './db.mjs';
+import {balance,walletKey,price,selectedCurrency} from './model.mjs';
+import * as A from './adapter.mjs';
+import {reserved} from './commerce.mjs';
+import {compose,needs} from './sessions.mjs';
+import {storageBusy,storagePending} from './logistica.mjs';
+async function rowView(r,gm=false){const v=A.itemView(r);return {id:r.id,qty:r.qty,...(gm&&r.maxQty!=null?{maxQty:r.maxQty}:{}),priceBase:r.priceBase,visible:r.visible,identified:r.identified,alias:r.alias,blocked:r.blocked,...v,description:await enrich(v.description,false),...(gm?{trueName:r.data.name,source:r.source}: {})};}
+export async function project(user,s=read()){const isGM=user.isGM,actors=A.ownedActors(user),out={defaultCurrency:s.defaultCurrency??'base',walletCurrencies:isGM?copy(s.walletCurrencies??{}):Object.fromEntries(Object.entries(s.walletCurrencies??{}).filter(([key])=>actors.some(a=>a.uuid===key))),currencies:copy(s.currencies),wallets:[],entities:[],sessions:[],identifications:[],busy:!!s.pending||storageBusy(s),history:isGM?copy(s.history.slice(-100).reverse()):[],pending:isGM?s.pending?{id:s.pending.id,name:s.pending.name,phase:s.pending.phase}:storagePending(s):null};
+ for(const a of actors){const items=[];for(const i of all(a.items).filter(A.physical)){const r=A.rowFromItem(s,i);if(r)items.push({...await rowView(r,isGM),itemId:i.id,unknown:!r.identified});}out.wallets.push({uuid:a.uuid,name:a.name,img:a.img,currencyId:selectedCurrency(s,a.uuid).id,balance:balance(s,a.uuid),space:a.system?.carga??null,items});}
+ for(const e of s.entities){let eligible=[];if(isGM)eligible=actors.map(a=>a.uuid);else for(const a of actors){try{await A.access(e,a,user);eligible.push(a.uuid);}catch{}}if(!isGM&&!eligible.length)continue;let stock;try{stock=await A.stock(s,e);}catch{if(!isGM)continue;stock=[];}
+ const rows=[];for(const r of stock){const b=reserved(s,e,r);if(!isGM&&(!r.visible||b))continue;rows.push({...await rowView(r,isGM),cost:r.priceBase==null?null:price(r.priceBase,r.qty,e.buyRate),unitCost:r.priceBase==null?null:price(r.priceBase,1,e.buyRate),reserved:!!b});}
+ const buybacks=[];for(const b of s.buybacks.filter(b=>b.entityId===e.id&&b.status==='available'&&b.epoch===e.epoch&&(isGM||actors.some(a=>a.uuid===b.actorUuid)))){const r=stock.find(r=>r.id===b.rowId);if(r)buybacks.push({...copy(b),name:A.itemView(r).name,img:A.itemView(r).img});}
+ const nearby=[];for(const a of all(game.actors).filter(a=>a.type==='character'&&a.hasPlayerOwner)){try{await A.reachable(e,a,{isGM:false});nearby.push({uuid:a.uuid,name:a.name});}catch{}}
+ out.entities.push({actorUuid:e.actorUuid,tokenUuid:e.tokenUuid,nearby,id:e.id,name:e.name,img:e.img,mode:e.mode,eligible,currencyId:selectedCurrency(s,walletKey(e)).id,balance:balance(s,walletKey(e)),description:await enrich(e.description,false),rows,buybacks,...(isGM?{config:copy(e)}:{})});}
+ for(const x of s.sessions){const eligible=x.participants.filter(k=>actors.some(a=>a.uuid===k));if(!isGM&&(!eligible.length||x.status==='draft'))continue;const pool=x.status==='draft'?(await compose(s,x)).rows.map(r=>({...r,...x.overrides?.[r.id],maxQty:r.qty})):x.pool;const rows=[];for(const r of pool){const claims=[];for(const [uuid,qty] of Object.entries(x.claims[r.id]??{})){let a;try{a=await A.actor(uuid);}catch{continue;}claims.push({uuid,name:a.name,img:a.img,qty});}rows.push({...await rowView(r,isGM),claims,contested:claims.reduce((n,c)=>n+c.qty,0)>r.qty});}
+ const participants=[];for(const uuid of x.participants){try{const a=await A.actor(uuid);participants.push({uuid,name:a.name,img:a.img,ready:!!x.ready[uuid]});}catch{}}
+ out.sessions.push({id:x.id,name:x.name,status:x.status,epoch:x.epoch,pauseReason:x.pauseReason??'',cash:x.status==='draft'?x.cashOverride??(await compose(s,x)).cash:x.cash,rows,eligible,participants,choices:copy(x.choices),needs:x.status==='resolving'?copy(needs(x)):[],...(isGM?{sources:copy(x.sources),notes:copy(x.notes)}:{})});}
+ for(const r of s.identifications){if(!isGM&&!actors.some(a=>a.uuid===r.actorUuid))continue;const item=await fromUuid(r.actorUuid+'.Item.'+r.itemId);const record=s.records[r.recordId];out.identifications.push({id:r.id,actorUuid:r.actorUuid,itemId:r.itemId,entityId:r.entityId,status:r.status,price:r.price,name:item?.name??'Item indisponível',...(isGM?{trueName:record?.data.name,description:await enrich(record?.data.system?.descricao??'',true)}:{})});}
+ return out;
+}
+export async function publish(){const s=read();for(const u of all(game.users).filter(u=>!u.isGM))await writeView(u,await project(u,s));}
+export const view=async()=>game.user.isGM?project(game.user):userView();

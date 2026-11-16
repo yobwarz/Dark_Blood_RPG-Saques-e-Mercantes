@@ -1,0 +1,4 @@
+import {esc} from './core.mjs';
+import {denominations,selectedCurrency,money} from './model.mjs';
+export function walletBadge(amount,state,currencyId=null){return `<span class="sem-money">${denominations(amount,state,currencyId).map(c=>`<span class="sem-denomination" title="${esc(c.name)}"><img src="${esc(c.img)}" alt="${esc(c.name)}"><b>${c.amount}</b> <span>${esc(c.abbr)}</span></span>`).join('<span class="sem-money-plus"> + </span>')}</span>`;}
+export function sheetWalletHTML(amount,state,key){const c=selectedCurrency(state,key),saldo=money(amount,state,c.id);return `<span class="se-pe-titulo sem-sheet-wallet-title">${esc(c.name)}</span><input type="text" class="sem-sheet-wallet-balance" value="${esc(saldo)}" readonly aria-readonly="true" aria-label="Saldo em ${esc(c.name)}" title="${esc(saldo)}">`;}

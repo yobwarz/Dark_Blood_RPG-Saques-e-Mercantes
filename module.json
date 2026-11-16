@@ -1,0 +1,41 @@
+{
+  "id": "sangue-escuro-saques-mercantes",
+  "title": "Sangue Escuro: Saques e Mercantes",
+  "description": "Distribuição disputada de espólios, recipientes, mercantes e carteiras próprias, com controle do Mestre e transferência rastreável.",
+  "version": "0.2.5",
+  "authors": [
+    {
+      "name": "Sangue Escuro — Yob Warz"
+    }
+  ],
+  "compatibility": {
+    "minimum": "13",
+    "verified": "13"
+  },
+  "relationships": {
+    "systems": [
+      {
+        "id": "sangue-escuro",
+        "type": "system",
+        "compatibility": {
+          "minimum": "0.8.6"
+        }
+      }
+    ]
+  },
+  "esmodules": [
+    "scripts/main.mjs"
+  ],
+  "styles": [
+    "assets/saques.css"
+  ],
+  "flags": {
+    "sangue-escuro": {
+      "tipo": "auxiliar"
+    }
+  },
+  "license": "LICENSE",
+  "url": "https://github.com/yobwarz/Dark_Blood_RPG-Saques-e-Mercantes",
+  "manifest": "https://raw.githubusercontent.com/yobwarz/Dark_Blood_RPG-Saques-e-Mercantes/main/module.json",
+  "download": "https://raw.githubusercontent.com/yobwarz/Dark_Blood_RPG-Saques-e-Mercantes/v0.2.5/dist/sangue-escuro-saques-mercantes.zip"
+}
