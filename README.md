@@ -28,3 +28,6 @@ O módulo prioriza praticidade, privacidade e controle total do Mestre, funciona
 **O uso dessas extensões é opcional.** Você pode jogar com o sistema base e adicionar os módulos conforme as necessidades da sua mesa.
 >
 **Sangue Escuro Engine** é um motor de regras, **Sangue Escuro RPG: Guia dos Mortos** se trata da publicação original comercializável e **Dark Blood RPG: \[Franquia\]: Expansão** é a linha de adaptações gratuitas de fãs.
+>
+### ☕ Apoie o projeto
+Se quiser contribuir com o desenvolvimento do Sangue Escuro RPG, me apoie pelo [Ko-fi](https://ko-fi.com/yobwrz) ou [Patreon](https://www.patreon.com/12868270/join). Toda contribuição é opcional e bem-vinda!
