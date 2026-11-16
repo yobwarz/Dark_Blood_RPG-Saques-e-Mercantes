@@ -2,7 +2,7 @@
 # 🧩 Módulos de Extensão (Opcional)
 O Sangue Escuro RPG pode ser complementado com módulos de extensão opcionais. Eles ampliam as funcionalidades do sistema, permitindo que cada grupo escolha as ferramentas que combinam com sua campanha.
 
-## 🛒 Saques e Mercantes
+### 🛒 Saques e Mercantes
 Saques e Mercantes é um módulo auxiliar para o sistema Sangue Escuro RPG. Ele oferece uma solução completa e independente para gerenciar carteiras, mercantes, recipientes de saque e a distribuição de espólios.
 
 >
