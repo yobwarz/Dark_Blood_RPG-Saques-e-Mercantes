@@ -1,5 +1,5 @@
 [![Apoie o projeto](https://imgur.com/4NvBS6y.png)](https://www.patreon.com/12868270/join)
-# 🧩 Módulos de Extensão (Opcional)
+## 🧩 Módulos de Extensão (Opcional)
 O Sangue Escuro RPG pode ser complementado com módulos de extensão opcionais. Eles ampliam as funcionalidades do sistema, permitindo que cada grupo escolha as ferramentas que combinam com sua campanha.
 
 ### 🛒 Saques e Mercantes
