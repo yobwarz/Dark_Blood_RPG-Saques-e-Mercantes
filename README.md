@@ -19,7 +19,6 @@ Saques e Mercantes é um módulo auxiliar para o sistema Sangue Escuro RPG. Ele 
 🛡️ Operações robustas com recuperação de falhas, diários privados e proteção contra interrupções.
 >
 O módulo prioriza praticidade, privacidade e controle total do Mestre, funcionando de forma nativa e estável dentro do ecossistema Sangue Escuro.
-
 >
 ### 📦 Instalação e uso
 1. Na tela inicial do Foundry Virtual Tabletop, acesse Módulos adicionais → Instalar módulo.
